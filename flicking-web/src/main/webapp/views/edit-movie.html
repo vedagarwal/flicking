@@ -1,0 +1,42 @@
+<div class="well bs-component">
+  <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+     <li class="active"><a data-toggle="tab" ng-click="switchTabTo('movie')">Movie</a></li>
+     <li class=""><a data-toggle="tab" ng-click="switchTabTo('reviews')">Reviews</a></li>
+   <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      Dropdown <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="#dropdown1" data-toggle="tab">Action</a></li>
+      <li class="divider"></li>
+      <li><a href="#dropdown2" data-toggle="tab">Another action</a></li>
+    </ul>
+    </li>  
+</ul>
+
+<div class="tab-content">
+    <div ng-include="tabTemplates[activeTab]">
+</div>    
+    
+    
+<!--<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+  <li class="active"><a href="#movie" data-toggle="tab">Movie</a></li>
+  <li class=""><a href="#reviews" data-toggle="tab">Reviews</a></li>
+  <li class="disabled"><a>Disabled</a></li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      Dropdown <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="#dropdown1" data-toggle="tab">Action</a></li>
+      <li class="divider"></li>
+      <li><a href="#dropdown2" data-toggle="tab">Another action</a></li>
+    </ul>
+  </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="ng-view"></div>
+</div>-->
+</div>
+
+

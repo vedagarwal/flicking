@@ -1,0 +1,31 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <form  name="reviewForm" class="form-horizontal" ng-submit="submitReviewForm(reviewForm.$valid)" novalidate>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label" for="focusedInput">Reviewer</label>
+                    <select class="form-control" id="select" ng-model="review.reviewer">
+                        <option ng-repeat="reviewer in reviewers">{{reviewer}}</option>                       
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="focusedInput">Rating</label>
+                    <input class="form-control" id="focusedInput" type="number" ng-model="review.rating"></input>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="focusedInput">Review</label>
+                    <textarea class="form-control" rows="2" id="textArea" ng-model="review.review"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteReview()">Delete</button>
+                <button type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="saveReview()">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="well bs-component">
+<a class="btn btn-primary" href="#/addMovie">Add Movie</a> 
+<table class="table table-striped table-hover ">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Movie Name</th>
+			<th>Director</th>
+			<th>Duration</th>
+            <th>Pub/Rel/Img</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="movie in movies">
+			<td>{{movie.id}}</td>
+			<td>{{movie.movieName}}</td>
+			<td>{{movie.director}}</td>			
+            <td>{{movie.duration}}</td>
+            <td>
+            <i class="fa fa-check-circle-o fa-lg green-color" ng-show="movie.published"></i>
+            <i class="fa fa-times-circle-o fa-lg red-color" ng-hide="movie.published"></i>            
+            <i class="fa fa-check-circle-o fa-lg green-color" ng-show="movie.released"></i>
+            <i class="fa fa-times-circle-o fa-lg red-color" ng-hide="movie.released"></i>            
+            <i class="fa fa-check-circle-o fa-lg green-color" ng-show="movie.imageURL"></i>
+            <i class="fa fa-times-circle-o fa-lg red-color" ng-hide="movie.imageURL"></i>                     		   
+			</td>
+			<td>
+            <a class="btn btn-xs btn-primary" href="#/addImage/{{movie.id}}">Add/Edit Image</a>	
+            <a class="btn btn-xs btn-primary" href="#/editMovie/{{movie.id}}">Edit</a>
+			<button class="btn btn-xs btn-danger" ng-click="deleteMovie(movie)">Delete</button>    
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>    

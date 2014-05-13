@@ -1,0 +1,112 @@
+ <div class="pg-opt pin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Sign up</h2>
+                </div>
+                <div class="col-md-6">
+                    <ol class="breadcrumb">
+                        <li><a href="sign-up.html#">Home</a></li>
+                        <li><a href="sign-up.html#">Pages</a></li>
+                        <li class="active">Sign up</li>
+                    </ol>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+   
+    <section class="slice bg-3">
+        <div class="w-section inverse">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <h2>Welcome to Flicking Truth</h2>
+                            <p style="font-size:16px;">
+                               Create your own account and explore more.
+                            </p>
+    
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3">
+                        <div class="w-section inverse">                       
+                            <div class="w-box sign-in-wr bg-5">
+                                
+                                <div class="form-header">
+                                    <h2>Create your own account</h2>
+                                </div>
+                                <div class="form-body">
+                                    <p>
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                                    </p>
+                                     <div ng-class="'alert alert-'+alert.status" ng-show="alert.message">{{alert.message}}</div>
+                                    <form name="registerForm"  class="form-light padding-15" ng-submit="register(registerForm.$valid)" novalidate>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group" ng-class="{ 'has-error' : registerForm.firstName.$invalid && !registerForm.firstName.$pristine }">
+                                                    <label for="firstName">First name</label>
+                                                    <input type="text" class="form-control" name="firstName" id="firstName" placeholder="" ng-model="user.firstName" required>
+                                                    <p ng-show="registerForm.firstName.$invalid && !registerForm.firstName.$pristine" class="help-block">First name is required.</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="lastName">Last name</label>
+                                                    <input type="text" class="form-control" id="lastName" placeholder="" ng-model="user.lastName">
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        
+                                        <div class="form-group" ng-class="{ 'has-error' : registerForm.txtEmail.$invalid && !registerForm.txtEmail.$pristine }">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="" ng-model="user.email" required>
+                                             <p ng-show="registerForm.txtEmail.$invalid && !registerForm.txtEmail.$pristine " class="help-block">Valid Email is required.</p>
+                                            
+                                        </div>
+                                                
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group" ng-class="{ 'has-error' : registerForm.password.$invalid && !registerForm.password.$pristine }">
+                                                    <label for="password">Password</label>
+                                                    <input type="password" ng-minlength="6" class="form-control" name="password" id="password" placeholder="" ng-model="user.password" required>
+                                                    
+                                                    <p ng-show="registerForm.password.$error.minlength && registerForm.password.$invalid && !registerForm.password.$pristine" class="help-block">Password should be minimum 6 chars.</p>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group" ng-class="{ 'has-error' : registerForm.confirm_password.$invalid && !registerForm.confirm_password.$pristine }">
+                                                    <label for="pass2">Confirm password</label>
+                                                    <input type="password" ng-model="confirm_password" class="form-control" id="confirm_password" placeholder="" name="confirm_password" data-match="user.password" required>
+                                                    <p ng-show="registerForm.confirm_password.$error.match" class="help-block">Password do not match !</p>
+                                                  
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>                                       
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label class="checkbox persistent"><input type="checkbox"> I accept the <a href="http://preview.webpixels.ro/boomerang/terms.html">terms and conditions of this website.</a></label>                        
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button class="btn btn-two pull-right" type="submit" ng-disabled="registerForm.$invalid">Sign Up</button>                        
+                                            </div>
+                                        </div>
+                                    </form>
+                                    
+                                </div>
+                                <div class="form-footer">
+                                    <p>Already have an account? <a href="#login">Click here to sign in.</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </section>

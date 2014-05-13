@@ -1,0 +1,27 @@
+## production DB
+#jdbc.driverClassName=com.mysql.jdbc.Driver
+#jdbc.url=####
+#jdbc.username=####
+#jdbc.password=####
+#hibernate.hbm2ddl.auto=update
+#hibernate.dialect=org.hibernate.dialect.MySQLDialect
+#hibernate.show_sql=true
+
+## localhost DB
+jdbc.driverClassName=com.mysql.jdbc.Driver
+jdbc.url=jdbc\:mysql\://localhost\:3306/flicking
+jdbc.username=root
+jdbc.password=root
+hibernate.hbm2ddl.auto=update
+hibernate.dialect=org.hibernate.dialect.MySQLDialect
+hibernate.show_sql=true
+
+## mail settings
+mail.server.host=smtp.gmail.com
+mail.server.port=587
+mail.server.protocol=smtp
+mail.server.username=####
+mail.server.password=####
+
+## mail addresses
+mail.contact=####

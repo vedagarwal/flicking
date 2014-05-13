@@ -1,0 +1,20 @@
+<div class="well bs-component">
+<form class="form-horizontal">
+  <fieldset>
+    <legend>Upload Image</legend>
+    <div class="form-group">
+      <label for="file" class="col-lg-2 control-label">Select Movie Image</label>
+      <div class="col-lg-6">  
+          <input type="file" ng-file-select="onFileSelect($files)"></input>
+        </div>
+    </div> 
+      <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">        
+        <button class="btn btn-default" ng-click="upload.abort()">Cancel Upload</button>
+        <button class="btn btn-primary" ng-click="upload()">Upload</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
+

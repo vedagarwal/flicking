@@ -1,0 +1,103 @@
+<form name="movieForm" class="form-horizontal" ng-submit="updateMovie(movieForm.$valid)" novalidate>
+    <fieldset>
+        <legend>Edit Movie</legend>
+
+        <div class="form-group">
+            <label for="movieId" class="col-lg-2 control-label">Movie Id</label>
+            <div class="col-lg-6">
+                <label for="movieId" class="col-lg-6 control-label">{{movie.id}}</label>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : movieForm.movieName.$invalid && !movieForm.movieName.$pristine }">
+            <label for="movieName" class="col-lg-2 control-label">Movie Name</label>
+            <div class="col-lg-6">
+                <input type="text" class="form-control" name="movieName" placeholder="Enter Movie Name" ng-model="movie.movieName" required></input>
+                <p ng-show="movieForm.movieName.$invalid && !movieForm.movieName.$pristine " class="help-block">Movie name is required.</p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : movieForm.director.$invalid && !movieForm.director.$pristine }">
+            <label for="director" class="col-lg-2 control-label">Director</label>
+            <div class="col-lg-6">
+                <input type="text" class="form-control" name="director" placeholder="Director" ng-model="movie.director" required></input>
+                <p ng-show="movieForm.director.$invalid && !movieForm.director.$pristine " class="help-block">Director name is required.</p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : movieForm.writer.$invalid && !movieForm.writer.$pristine }">
+            <label for="writer" class="col-lg-2 control-label">Writer</label>
+            <div class="col-lg-6">
+                <input type="text" class="form-control" name="writer" placeholder="Writer" ng-model="movie.writer" required></input>
+                <p ng-show="movieForm.writer.$invalid && !movieForm.writer.$pristine " class="help-block">Writer name is required.</p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : movieForm.cast.$invalid && !movieForm.cast.$pristine }">
+            <label for="cast" class="col-lg-2 control-label">Cast</label>
+            <div class="col-lg-6">
+                <input type="text" class="form-control" name="cast" placeholder="Cast : Seperated with comma" ng-model="movie.cast" required></input>
+                <p ng-show="movieForm.cast.$invalid && !movieForm.cast.$pristine " class="help-block">Cast is required.</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description" class="col-lg-2 control-label">Description</label>
+            <div class="col-lg-6">
+                <textarea class="form-control" rows="3" ng-model="movie.description"></textarea>
+                <span class="help-block">Type some description about movie</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="duration" class="col-lg-2 control-label">Duration</label>
+            <div class="col-lg-6">
+                <input type="number" class="form-control" placeholder="Duration in mins" ng-model="movie.duration"></input>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="published" class="col-lg-2 control-label">Published</label>
+            <div class="col-lg-6">
+                <input type="checkbox" ng-model="movie.published">
+                </input>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="released" class="col-lg-2 control-label">Released</label>
+            <div class="col-lg-6">
+                <input type="checkbox" ng-model="movie.released">
+                </input>
+            </div>
+
+        </div>
+
+
+   <div class="form-group">
+            <label for="duration" class="col-lg-2 control-label">Release Date</label>
+            <div class="col-lg-6">
+                <p class="input-group">
+                    <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="movie.releaseDate" is-open="opened" min="'2014-01-01'" max="'2020-01-01'" close-text="Close"></input>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" ng-click="openDate($event)">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                </p>
+            </div>
+        </div>
+     
+
+
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button class="btn btn-default">Cancel</button>           
+                <button type="submit" class="btn btn-primary" ng-disabled="movieForm.$invalid">Update</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		 http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+
+	<mvc:annotation-driven />
+
+	<mvc:resources location="/images/" mapping="/images/**" />
+	<mvc:resources location="/css/" mapping="/css/**" />
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/fonts/" mapping="/fonts/**" />
+	<mvc:resources location="/assets/" mapping="/assets/**" />
+	<mvc:resources location="/font-awesome/" mapping="/font-awesome/**" />
+	<mvc:resources location="/views/" mapping="/views/**" />
+
+	<context:component-scan base-package="com.keymetic.flicking" />
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="268435456" /> <!-- 256 megs -->
+	</bean>
+
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+		<property name="prefix"> <value>/pages/</value> </property> <property name="suffix"> 
+		<value>.jsp</value> </property> </bean> -->
+
+	<context:property-placeholder location="classpath:configuration.properties" />
+	
+	<util:properties id="messageProperties" location="classpath:message.properties"/>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.keymetic.flicking.core.entity" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+			</props>
+		</property>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+		> <property name="prefix"> <value>/</value> </property> <property name="suffix"> 
+		<value>.html</value> </property> </bean> -->
+
+	<!-- Email support -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${mail.server.host}" />
+		<property name="port" value="${mail.server.port}" />
+		<property name="protocol" value="${mail.server.protocol}" />
+		<property name="username" value="${mail.server.username}" />
+		<property name="password" value="${mail.server.password}" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.quitwait">false</prop>
+				<prop key="mail.smtp.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!-- THYMELEAF: Template Resolver for email templates -->
+	<bean id="emailTemplateResolver"
+		class="org.thymeleaf.templateresolver.ClassLoaderTemplateResolver">
+		<property name="prefix" value="mail/" />
+		<property name="templateMode" value="HTML5" />
+		<property name="characterEncoding" value="UTF-8" />
+		<property name="order" value="1" />
+		<property name="cacheable" value="false" />
+	</bean>
+
+	<bean id="webTemplateResolver"
+		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<!-- <property name="prefix" value="/WEB-INF/html/" /> -->
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML5" />
+		<property name="order" value="2" />
+		<property name="characterEncoding" value="UTF-8" />
+		<property name="cacheable" value="false" />
+	</bean>
+
+	<bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
+		<property name="templateResolvers">
+			<set>
+				<ref bean="emailTemplateResolver" />
+				<ref bean="webTemplateResolver" />
+			</set>
+		</property>
+	</bean>
+
+	<bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+		<property name="characterEncoding" value="UTF-8" />
+	</bean>
+
+	<!-- Spring Security Related Configuration -->
+	<bean id="passwordEncoder"
+		class="com.keymetic.flicking.web.security.SaltedSHA256PasswordEncoder">
+		<constructor-arg value="secret" />
+	</bean>
+
+	<security:authentication-manager id="authenticationManager">
+		<security:authentication-provider
+			user-service-ref="customUserDetailsService">
+			<security:password-encoder ref="passwordEncoder"></security:password-encoder>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<security:http realm="Protected API" use-expressions="true"
+		auto-config="false" create-session="stateless" entry-point-ref="unauthorizedEntryPoint"
+		authentication-manager-ref="authenticationManager">
+
+		<security:custom-filter ref="authenticationTokenProcessingFilter"
+			position="FORM_LOGIN_FILTER" />
+
+		<security:intercept-url pattern="/api/users**"
+			access="hasRole('ROLE_ADMIN')" method="GET" />
+		<security:intercept-url pattern="/api/users**"
+			access="hasRole('ROLE_ADMIN')" method="POST" />
+		<security:intercept-url pattern="/api/users**"
+			access="hasRole('ROLE_ADMIN')" method="DELETE" />
+		<security:intercept-url pattern="/api/users**"
+			access="hasRole('ROLE_ADMIN')" method="PUT" />
+
+		<security:intercept-url pattern="/api/movies**"
+			access="hasRole('ROLE_ADMIN')" method="POST" />
+		<security:intercept-url pattern="/api/movies**"
+			access="hasRole('ROLE_ADMIN')" method="DELETE" />
+		<security:intercept-url pattern="/api/movies**"
+			access="hasRole('ROLE_ADMIN')" method="PUT" />
+
+		<security:intercept-url pattern="/api/movies/*/reviews**"
+			access="hasRole('ROLE_ADMIN')" method="POST" />
+		<security:intercept-url pattern="/api/movies/*/reviews/**"
+			access="hasRole('ROLE_ADMIN')" method="DELETE" />
+		<security:intercept-url pattern="/api/movies/*/reviews/**"
+			access="hasRole('ROLE_ADMIN')" method="DELETE" />
+
+
+		<security:intercept-url pattern="/api/movies/*/comments"
+			access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" method="POST" />
+		<security:intercept-url pattern="/api/movies/*/comments/*"
+			access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" method="DELETE" />
+
+	</security:http>
+
+	<bean id="unauthorizedEntryPoint"
+		class="com.keymetic.flicking.web.security.UnauthorizedEntryPoint" />
+
+	<bean
+		class="com.keymetic.flicking.web.security.AuthenticationTokenProcessingFilter"
+		id="authenticationTokenProcessingFilter">
+		<constructor-arg ref="customUserDetailsService" />
+	</bean>
+
+</beans>

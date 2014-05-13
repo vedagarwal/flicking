@@ -1,0 +1,138 @@
+<div class="pg-opt pin">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>{{movie.movieName}}</h2>
+            </div>
+            <div class="col-md-6">
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="blog-grid.html#">Home</a>
+                    </li>
+                    <li>
+                        <a href="blog-grid.html#">Pages</a>
+                    </li>
+                    <li class="active">Blog</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<section class="slice bg-3">
+    <div class="w-section inverse">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <!--                    <h3 class="section-title">{{movie.movieName}}</h3>-->
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="movie-details-image">
+                                <img ng-src="{{movie.imageURL}}" class="img-responsive" alt="">
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="row" ng-show="movie.movieName">
+                                <div class="col-sm-7">
+                                    <div class="movie-detail-details">
+                                        <p>
+                                            <strong>RELEASED ON :&nbsp;</strong>{{movie.releaseDate | date:'mediumDate'}}</p>
+                                        <p>
+                                            <strong>DIRECTOR :&nbsp;</strong>{{movie.director}}
+
+                                            <p>
+                                                <strong>WRITER :&nbsp;</strong>{{movie.writer}}</p>
+                                            <p>
+                                                <strong>CAST :&nbsp;</strong>{{movie.cast}}</p>
+                                            <br>
+                                            <p class="delimiter">
+                                                {{movie.description}}
+                                            </p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+
+                                    <div class="movie-side">
+                                        <div class="rating">{{movie.averageReviewerRating}}<span class="rating-upon">/5</span>
+                                           
+                                        </div>
+                                        <span>OVERALL RATING</span>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="col-md-4">
+                    <div class="vertical-info">
+                        <div ng-repeat="review in movie.reviews">
+                            <h4>{{review.reviewer}}</h4>
+                            <rating ng-model='review.rating' max="5" readonly="true"></rating>
+                            <p class="delimiter">
+                                {{review.review}}
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="slice relative bg-2">
+    <div class="w-section inverse">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <h4>
+                            Comments <i> ({{comments.length}})</i>
+                        </h4>
+                        <a class="btn btm-sm btn-one" data-toggle="modal" data-target="#myModal" ng-show="user">
+                            <i class="fa fa-bolt"></i>Comment
+                        </a>
+                        <a class="btn btm-sm btn-one" href="#login" ng-hide="user">
+                            <i class="fa fa-bolt"></i>Login to Comment
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" ng-repeat="comment in comments">
+                    <div class="aside-feature">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="img-feature">
+                                    <img src="images/prv/team-img-1.jpg" class=" img-thumbnail" alt="">
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <rating ng-model='comment.score' max="5" readonly="true"></rating>
+                                <p>
+                                    <i class="fa fa-quote-left"></i>
+                                    <span ng-show="comment.message">{{comment.message}}</span>
+                                    <i class="fa fa-quote-right"></i>-
+                                    <span class="strong">{{comment.user}}</span>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+</section>
+<div class="modal fade" id="myModal" ng-include="'views/add-comment.html'" tabindex="-1" role="dialog" aria- labelledby="myModalLabel" aria-hidden="true">

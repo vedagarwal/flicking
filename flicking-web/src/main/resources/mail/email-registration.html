@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:remove="all">Template for HTML email (simple)</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+       <p>
+            Hello, <span th:text="${name}">User</span>
+        </p>
+        <p>
+        Thank you for registering at www.flickingtruth.com.<br />
+        In case of any issues please drop a mail to <a href="mailto:contact@flickingtruth.com">
+contact@flickingtruth.com</a>
+        </p>   
+        <br />
+        <br />   
+        <p>
+            Regards, <br />
+            <em>The Flicking Team</em><br />
+            <a href="http://www.flickingtruth.com">www.flickingtruth.com</a>
+        </p>
+    </body>
+</html>

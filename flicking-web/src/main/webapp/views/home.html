@@ -1,0 +1,94 @@
+<section class="slice bg-3">
+
+    <div class="w-section inverse">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-8">
+                    <h3>Latest Movies</h3>
+                    <ul class="list-listings">
+                        <li ng-repeat="movie in movies">
+                    
+                            <div class="row white-smoke-color">
+                                <div class="col-sm-3">
+                                    <div>
+                                        <img ng-src="{{movie.imageURL}}" class="img-responsive img-center" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h3>
+                                        <a href="#/movie/{{movie.id}}">{{movie.movieName}}</a>
+                                    </h3>
+                                    <div class="movie-details">
+                                        <p>
+                                            <strong>RELEASED ON :&nbsp;</strong>{{movie.releaseDate | date:'mediumDate'}}</p>
+                                        <p>
+                                            <strong>DIRECTOR :&nbsp;</strong>{{movie.director}}
+                                            <strong>&nbsp;| WRITER :&nbsp;</strong>{{movie.writer}}</p>
+                                        <p>
+                                            <strong>CAST :&nbsp;</strong>{{movie.cast}}</p>
+
+                                        <p class="half-line">&nbsp;</p>
+                                        <p ng-repeat="review in movie.reviews">{{review.reviewer}}
+                                            <rating ng-model='review.rating' max="5" readonly="true"></rating>
+                                        </p>
+                                        <p class="half-line">&nbsp;</p>
+                                        <p>
+                                            <i>"
+                                                {{movie.description}}"</i>
+                                        </p>
+                                         <p class="half-line">&nbsp;</p>
+                                        <button type="button" class="btn btn-xs btn-primary facebook-color" ng-click="share(movie)"><span class="fa fa-facebook-square fa-lg"></span>&nbsp;Share on Facebook</button>
+                                    </div>
+                                   
+                                                                        
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="movie-side">
+                                        <div class="rating">{{movie.averageReviewerRating}}<span class="rating-upon">/5</span></div>
+                                        <p>OVERALL RATING</p>                                       
+                                        <a href="#/movie/{{movie.id}}" class="btn btn-two">Read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                    <ul class="pager">
+                        <li ng-class="prevPageDisabled()">
+                            <a href ng-click="prevPage()">Previous</a>
+                        </li>
+                        <li ng-class="nextPageDisabled()">
+                            <a href ng-click="nextPage()">Next</a>
+                        </li>
+                    </ul>
+                </div>
+<!--            Begin right content-->
+                <div class="col-sm-12 col-md-4">
+                    <h3>Upcoming Movies</h3>
+                    <ul class="bullet">
+                                        <li>
+                                            <figure>1</figure>
+                                            <h4>Movie Name</h4>
+                                            <p>Release Date : 12/7/2014</p>
+                                            <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        </li>
+                                        <li>
+                                            <figure>2</figure>
+                                            <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        </li>
+                                        <li>
+                                            <figure>3</figure>
+                                            <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        </li>
+                                    </ul>
+                </div>
+<!--                End right content-->
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</section>
+

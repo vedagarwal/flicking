@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:remove="all">Template for HTML email (simple)</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <p>
+            Hello, Admin
+        </p>
+        <p>
+           Name : <span th:text="${name}">NA</span>
+        </p>
+          <p>
+           Email : <span th:text="${email}">NA</span>
+        </p>
+         <p>
+           Phone : <span th:text="${phone}">NA</span>
+        </p>
+         <p>
+           Subject : <span th:text="${subject}"></span>
+        </p>
+         <p>
+           Message : <span th:text="${message}"></span>
+        </p>
+        <p>
+            Regards, <br />
+            &emsp; <em>The Flicking Team</em>
+        </p>
+    </body>
+</html>

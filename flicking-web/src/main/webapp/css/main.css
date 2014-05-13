@@ -1,0 +1,115 @@
+.wp-theme-1 ul.list-listings .listing-body p {
+    margin: 0;
+    line-height: 18px;
+}
+.wp-theme-1 ul.list-listings .listing-body strong {
+    font-size: 12px;
+}
+.wp-theme-1 ul.list-listings .listing-body div.section-div {
+    margin: 5px 0;
+}
+.wp-theme-1 ul.list-listings .listing-actions .rating {
+    height: 32px;
+    width: 30%;
+    margin: 0 auto;
+    line-height: 34px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    font-size: 18px;
+    background: #3f7e00;
+    color: #fff;
+}
+.green {
+    color: green;
+}
+.red {
+    color: red;
+}
+.movie-details p {
+    margin: 0;
+    line-height: 18px;
+}
+.movie-details .half-line {
+    line-height: 5px;
+}
+.rating {
+    height: 35px;
+    width: 70px;
+    margin: 0 auto;
+    line-height: 35px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    font-size: 28px;
+    background: #3f7e00;
+    color: #fff;
+    text-align: center;
+}
+.movie-side {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-top: 40px;
+}
+.movie-side .rating {
+    height: 35px;
+    width: 70px;
+    margin: 0 auto;
+    line-height: 35px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    font-size: 28px;
+    background: #3f7e00;
+    color: #fff;
+    text-align: center;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e0dede;
+}
+.special-text {
+    margin-top: 25px;
+}
+.movie-details-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+}
+.movie-detail-details{
+padding-top: 15px;
+}
+.movie-detail-details p {
+    margin-bottom: 3px;
+    line-height: 18px;
+    font-size: 16px;
+}
+.rating-upon {
+    font-size: 12px;
+    letter-spacing: 1px;
+/*    margin-left: 1px;*/
+}
+.wp-theme-1 h3 {
+    margin-top: 10px;
+}
+
+.img-center {margin:0 auto;}
+
+.facebook-color{
+background-color: #4e69a2;
+}
+
+.white-smoke-color{
+background-color: #F5F5F5;	
+}
+
+.green-color{
+color: green;
+}
+
+.red-color{
+color: red;
+}
+

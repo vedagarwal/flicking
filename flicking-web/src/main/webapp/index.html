@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html ng-app="flickingApp">
+
+<head>
+    <meta charset="utf-8"></meta>
+    <title>Flicking Truth</title>
+    <!-- <base href="/"></base> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <!-- Required -->
+    <script src="js/angular/angular.js" type="text/javascript"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+    <link href="css/global-style.css" rel="stylesheet" type="text/css" media="screen"></link>
+    <link href="css/main.css" rel="stylesheet" type="text/css" media="screen"></link>
+    <link href="css/toastr.min.css" rel="stylesheet"></link>
+    <link rel="icon" href="images/favicon.ico" type="image/icon"></link>
+    <link href="css/ngProgress.css" rel="stylesheet" type="text/css" media="screen"></link>
+    <link rel="stylesheet" href="css/font-awesome.css"></link>
+    <script type="text/javascript" src="js/ngProgress.js"></script>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/modernizr.custom.js"></script>
+    <script type="text/javascript" src="js/jquery.mousewheel-3.0.6.pack.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.js"></script>
+
+    <script type="text/javascript" src="assets/hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+    <script type="text/javascript" src="assets/page-scroller/jquery.ui.totop.min.js"></script>
+    <script type="text/javascript" src="assets/mixitup/jquery.mixitup.js"></script>
+    <script type="text/javascript" src="assets/mixitup/jquery.mixitup.init.js"></script>
+    <script type="text/javascript" src="assets/fancybox/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="assets/easy-pie-chart/jquery.easypiechart.js"></script>
+    <script type="text/javascript" src="assets/waypoints/waypoints.min.js"></script>
+    <script type="text/javascript" src="assets/sticky/jquery.sticky.js"></script>
+    <script type="text/javascript" src="js/jquery.wp.custom.js"></script>
+    <script type="text/javascript" src="js/jquery.wp.switcher.js"></script>
+    <script src="assets/layerslider/js/greensock.js" type="text/javascript"></script>
+    
+    <script src="js/toastr.min.js" type="text/javascript"></script>
+    <script src="js/angular/angular-file-upload-shim.min.js" type="text/javascript"></script>
+    <script src="js/angular/angular-file-upload.min.js" type="text/javascript"></script>
+    <script src="js/angular/angular-resource.js" type="text/javascript"></script>
+    <script src="js/angular/angular-route.js" type="text/javascript"></script>
+    <script src="js/angular/angular-cookies.js" type="text/javascript"></script>
+    <script src="js/angular/init.js" type="text/javascript"></script>
+    <script src="js/angular/main-controller.js" type="text/javascript"></script>
+    <script src="js/angular/services.js" type="text/javascript"></script>
+    <script src="js/angular/directives.js" type="text/javascript"></script>
+    <script src="js/ngFacebook.js" type="text/javascript"></script>
+  
+
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Header: Logo and Main Nav -->
+        <header>
+            <div id="navOne" class="navbar navbar-wp" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">                      
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html" title="Boomerang | One template. Infinite solutions">
+                            <img src="images/boomerang-logo-dark.png" alt="Boomerang | One template. Infinite solutions"></img>
+                        </a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active">
+                                <a href="/" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">Home</a>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="index.html#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">Upcoming Movies</a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="blog-grid.html">Hollywood</a>
+                                    </li>
+                                    <li>
+                                        <a href="blog-grid2.html">Bollywood</a>
+                                    </li>
+                                </ul>
+                            </li>
+                             <li>
+                                <a href="#contact">Contact</a>
+                            </li>
+
+                            <li class="dropdown" ng-show="hasRole('ROLE_ADMIN')">
+                                <a href="index.html#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">Manage</a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#movies">Movies</a>
+                                    </li>
+                                    <li>
+                                        <a href="#users">Users</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown" ng-show="user">
+                                <a href="index.html#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">{{user.name}}</a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">Profile</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="" ng-click="logout()">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li ng-hide="user">
+                                <a href="#login">Login</a>
+                            </li>
+                            
+                            <li ng-hide="user">
+                                <a href="#register">Sign Up</a>
+                            </li>
+                            <li class="dropdown animate-click" data-animate="animated fadeInUp" style="z-index:500;">
+                                <a href="index.html#" class="dropdown-toggle dropdown-form-toggle" data-toggle="dropdown">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-user animate-wr">
+                                    <li id="dropdownForm">
+                                        <div class="dropdown-form">
+                                            <form class="form-default form-inline p-15">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="What do you want to find?"></input>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-two" type="button">Go!</button>
+                                                    </span>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                           
+                        </ul>
+
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+            </div>
+        </header>
+
+
+
+        <div id="main">
+            <div ng-view="ng-veiw"></div>
+        </div>
+
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="col">
+                            <h4>Contact us</h4>
+                            <ul>
+                                <li>5th Avenue, New York - United States</li>
+                                <li>Phone: +10 724 1234 567 | Fax: +10 724 1234 567</li>
+                                <li>Email:
+                                    <a href="mailto:hello@example.com" title="Email Us">hello@example.com</a>
+                                </li>
+                                <li>Skype:
+                                    <a href="skype:my.business?call" title="Skype us">my-business</a>
+                                </li>
+                                <li>Creating great templates is our passion</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="col">
+                            <h4>Mailing list</h4>
+                            <p>Sign up if you would like to receive occasional treats from us.</p>
+                            <form class="form-inline">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Your email address..."></input>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-two" type="button">Go!</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="col col-social-icons">
+                            <h4>Follow us</h4>
+                    <a href="index.html#"><i class="fa fa-facebook"></i></a>
+                    <a href="index.html#"><i class="fa fa-google-plus"></i></a>
+                    <a href="index.html#"><i class="fa fa-linkedin"></i></a>
+                    <a href="index.html#"><i class="fa fa-twitter"></i></a>
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="col">
+                            <h4>About us</h4>
+                            <p>
+                                Boomerang Bootstrap Template is made with love and passion for your own business.
+                                <br></br>
+                                <br></br>
+                                <a href="index.html#" class="btn btn-two">Try it now!</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr></hr>
+
+                <div class="row">
+                    <div class="col-lg-9 copyright">
+                        2013 © Web Pixels. All rights reserverd.
+                        <a href="index.html#">Terms of use</a>|
+                        <a href="index.html#">Privacy policy</a>
+                    </div>
+                    <div class="col-lg-3 footer-logo">
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+<![endif]-->
+
+
+
+</body>
+
+</html>
