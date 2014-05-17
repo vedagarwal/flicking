@@ -6,16 +6,14 @@
     <title>Flicking Truth | Movie Reviews, Upcoming Movies, New Releases</title>
     <!--    <base href="/"></base>-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-    <!-- Facebook Required -->
-<meta property="og:title" content="Flicking Truth | Movie Reviews, Upcoming Movies, New Releases" />
-<meta property="og:type" content="article" />
-<meta property="og:image" content="images/flicking-logo-square.png" />
-<meta property="og:url" content="http://www.flickingtruth.com" />
-<meta property="og:description" content="Flicking Truth is made with love and passion for movie lovers, we bring you the best of reviews at a single place." />
+    <!-- Required -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    <!--    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>-->
+    <script src="//cdn.jsdelivr.net/angular.bootstrap/0.11.0/ui-bootstrap-tpls.min.js"></script>
     <link href="css/global-style.css" rel="stylesheet" type="text/css" media="screen"></link>
     <link href="css/main.css" rel="stylesheet" type="text/css" media="screen"></link>
     <link href="css/toastr.min.css" rel="stylesheet"></link>
-    <link rel="icon" href="images/favicon.ico" type="image/icon"></link>
+    <link rel="icon" href="images/favicon.png" type="image/icon"></link>
     <link href="css/ngProgress.css" rel="stylesheet" type="text/css" media="screen"></link>
     <link rel="stylesheet" href="css/font-awesome.css"></link>
 </head>
@@ -24,7 +22,7 @@
     <div class="wrapper">
         <!-- Header: Logo and Main Nav -->
         <header>
-            <div id="navOne" class="navbar navbar-wp" role="navigation" ng-controller="HeaderController">
+            <div id="navOne" class="navbar navbar-wp" role="navigation">
                 <div class="container">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,17 +31,17 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#" title="Flicking Truth | Movie Reviews">
+                        <a class="navbar-brand" href="/" title="Flicking Truth | Movie Reviews">
                             <img src="images/flicking-logo.png" alt="Flicking Truth | Movie Reviews"></img>
                         </a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li ng-class="{ active: isActive('/')}" >
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">Home</a>
+                            <li class="active">
+                                <a href="/" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">Home</a>
                             </li>
 
-                            <li  ng-class="{ active: isActive('/upcoming')}">
+                            <li>
                                 <a href="#upcoming">Upcoming Movies</a>
                             </li>
 
@@ -76,11 +74,11 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li ng-class="{ active: isActive('/login')}" ng-hide="user">
+                            <li ng-hide="user">
                                 <a href="#login">Login</a>
                             </li>
 
-                            <li ng-class="{ active: isActive('/register')}" ng-hide="user">
+                            <li ng-hide="user">
                                 <a href="#register">Sign Up</a>
                             </li>
                             <li class="dropdown animate-click" data-animate="animated fadeInUp" style="z-index:500;">
@@ -113,9 +111,30 @@
 
 
 
-        <div id="main">
-            <div ng-view="ng-veiw"></div>
-        </div>
+        <section class="slice bg-2" style="padding:90px 0;">
+            <div class="w-section inverse">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <h2>The page could not be found</h2>
+                                <h1 class="font-lg">
+                                    5
+                                    <i class="fa fa-times-circle-o"></i>0
+                                </h1>
+
+                                <p>
+                                    The page you are requesting is not found. Please check the URL and try again.
+                                    <br></br>Or you can drop a mail to support@flickingtruth.com.
+                                </p>
+                                <span class="clearfix"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
         <footer class="footer">
@@ -131,7 +150,7 @@
                                     <a href="mailto:support@flickingtruth.com" title="Email Us">support@flickingtruth.com</a>
                                 </li>
                                 <li>Skype:
-                                    <a href="skype:flickingtruth?call" title="Skype us">flickingtruth</a>
+                                    <a href="skype:my.business?call" title="Skype us">my-business</a>
                                 </li>
                                 <li>Getting great movie reviews is our passion</li>
                             </ul>
@@ -178,7 +197,7 @@
                             <p>
                                 Flicking Truth is made with love and passion for movie lovers, we bring you the best of reviews at a single place.
                                 <br></br>
-                                <a href="#" class="btn btn-two">Try it now!</a>
+                                <a href="/" class="btn btn-two">Try it now!</a>
                             </p>
                         </div>
                     </div>
@@ -189,8 +208,8 @@
                 <div class="row">
                     <div class="col-lg-9 copyright">
                         2014 © Flicking Truth. All rights reserverd.
-                        <a href="#">Terms of use</a>|
-                        <a href="#">Privacy policy</a>
+                        <a href="/">Terms of use</a>|
+                        <a href="/">Privacy policy</a>
                     </div>
                     <div class="col-lg-3 footer-logo">
 
@@ -206,12 +225,6 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
 <![endif]-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
-    <script src="//cdn.jsdelivr.net/angular.bootstrap/0.11.0/ui-bootstrap-tpls.min.js"></script>
-    <script src="js/toastr.min.js" type="text/javascript"></script>
-    <script src="js/ngProgress.js" type="text/javascript"></script>
     <script src="js/angular/angular-file-upload-shim.min.js" type="text/javascript"></script>
     <script src="js/angular/angular-file-upload.min.js" type="text/javascript"></script>
     <script src="js/angular/angular-resource.js" type="text/javascript"></script>
@@ -221,7 +234,12 @@
     <script src="js/angular/main-controller.js" type="text/javascript"></script>
     <script src="js/angular/services.js" type="text/javascript"></script>
     <script src="js/angular/directives.js" type="text/javascript"></script>
-    <script src="js/angular/ngFacebook.js" type="text/javascript"></script>    
+    <script src="js/angular/ngFacebook.js" type="text/javascript"></script>
+    <script src="js/toastr.min.js" type="text/javascript"></script>
+
+    <script src="js/ngProgress.js" type="text/javascript"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/modernizr.custom.js" type="text/javascript"></script>
     <script src="assets/page-scroller/jquery.ui.totop.min.js" type="text/javascript"></script>
     <script src="assets/hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
@@ -232,7 +250,7 @@
     <script src="assets/mixitup/jquery.mixitup.init.js" type="text/javascript"></script>
     <script src="js/jquery.easing.js" type="text/javascript"></script>
     <script src="js/jquery.wp.custom.js" type="text/javascript"></script>
-    <script src="assets/fancybox/jquery.fancybox.pack.js" type="text/javascript" ></script>
+    <script src="assets/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
     <script src="assets/waypoints/waypoints.min.js" type="text/javascript"></script>
 
 

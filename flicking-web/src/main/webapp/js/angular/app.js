@@ -57,19 +57,27 @@ flickingApp.config(function ($routeProvider, $locationProvider, $httpProvider,$f
     });
     
      $routeProvider.when('/contact', {
-        templateUrl: 'views/contact.html'       
+        templateUrl: 'views/contact.html',
+        controller: 'ContactController' 
     });
+    
+    $routeProvider.when('/upcoming', {
+        templateUrl: 'views/upcoming-movies.html',
+         controller: 'UpcomingController'       
+    });
+    
+    $routeProvider.otherwise({
+        templateUrl: 'views/home.html',
+        controller: 'IndexController'
+    });
+
     
     $facebookProvider.setAppId('273974442785397');
     
     //$locationProvider.html5Mode(true);
 
 
-//    $routeProvider.otherwise({
-//        templateUrl: 'views/home.html',
-//        controller: 'IndexController'
-//    });
-
+   
 
     $httpProvider.interceptors.push(function ($q, $rootScope, $location,$injector) {
         return {

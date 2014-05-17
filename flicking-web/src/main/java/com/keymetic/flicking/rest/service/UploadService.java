@@ -19,14 +19,14 @@ public class UploadService {
 	public static final String REGION = System.getProperty("region", "HKG");	
 	public static final String CONTAINER = "FlickingImages";
 	private final CloudFilesApi cloudFiles;
-	private final String cdnURI;
+	private final String cdnURI="cdn.flickingtruth.com";
 	
 	
 	
 	public UploadService() {
 		this.cloudFiles = ContextBuilder.newBuilder(PROVIDER).credentials("vedurocks", "ccfb068bc4bfac6bdb771c12d0c37df9")
 	            .buildApi(CloudFilesApi.class);;
-	     this.cdnURI = cloudFiles.cdnApiInRegion(REGION).get(CONTAINER).getUri().toString();
+	     //this.cdnURI = cloudFiles.cdnApiInRegion(REGION).get(CONTAINER).getUri().toString();
 	}
 
 

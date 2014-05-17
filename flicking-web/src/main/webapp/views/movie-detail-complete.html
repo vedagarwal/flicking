@@ -1,3 +1,4 @@
+
 <div class="pg-opt pin">
     <div class="container">
         <div class="row">
@@ -7,12 +8,9 @@
             <div class="col-md-6">
                 <ol class="breadcrumb">
                     <li>
-                        <a href="blog-grid.html#">Home</a>
-                    </li>
-                    <li>
-                        <a href="blog-grid.html#">Pages</a>
-                    </li>
-                    <li class="active">Blog</li>
+                        <a href="#">Home</a>
+                    </li>                    
+                    <li class="active">Detail</li>
                 </ol>
             </div>
 
@@ -44,16 +42,19 @@
                                                 <strong>WRITER :&nbsp;</strong>{{movie.writer}}</p>
                                             <p>
                                                 <strong>CAST :&nbsp;</strong>{{movie.cast}}</p>
-                                            <br>
+                                            <p class="half-line">&nbsp;</p>
                                             <p class="delimiter">
-                                                {{movie.description}}
+                                              <i>"{{movie.description}}"
+                                            </i>
                                             </p>
+                                         <button type="button" class="btn btn-xs btn-primary facebook-color" ng-click="share(movie)">
+                                            <span class="fa fa-facebook-square fa-lg"></span>&nbsp;Share on Facebook</button>
                                     </div>
                                 </div>
                                 <div class="col-sm-5">
 
                                     <div class="movie-side">
-                                        <div class="rating">{{movie.averageReviewerRating}}<span class="rating-upon">/5</span>
+                                        <div class="rating">{{movie.averageReviewerRating|number:1}}<span class="rating-upon">/5</span>
                                            
                                         </div>
                                         <span>OVERALL RATING</span>
@@ -113,8 +114,9 @@
                     <div class="aside-feature">
                         <div class="row">
                             <div class="col-md-2">
-                                <div class="img-feature">
-                                    <img src="images/prv/team-img-1.jpg" class=" img-thumbnail" alt="">
+                                <div class="centre-align">
+                                      <i ng-if="comment.score >= 3" class="fa fa-thumbs-o-up fa-3x thumbs-icon"></i>                            
+                                      <i ng-if="comment.score < 3" class="fa fa-thumbs-o-down fa-3x thumbs-icon"></i>                                 
                                 </div>
                             </div>
                             <div class="col-md-10">
@@ -122,7 +124,7 @@
                                 <p>
                                     <i class="fa fa-quote-left"></i>
                                     <span ng-show="comment.message">{{comment.message}}</span>
-                                    <i class="fa fa-quote-right"></i>-
+                                    <br>-
                                     <span class="strong">{{comment.user}}</span>
                                 </p>
 

@@ -10,6 +10,7 @@ import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,7 +41,6 @@ import com.keymetic.flicking.core.service.UserService;
 import com.keymetic.flicking.core.util.AppUserRole;
 import com.keymetic.flicking.core.vo.ContactVO;
 import com.keymetic.flicking.core.vo.ForgotPasswordVO;
-import com.keymetic.flicking.core.vo.PasswordVO;
 import com.keymetic.flicking.core.vo.UserVO;
 import com.keymetic.flicking.rest.service.EmailService;
 import com.keymetic.flicking.web.security.SaltedSHA256PasswordEncoder;
@@ -68,7 +67,10 @@ public class LoginController {
 
 	@Autowired
 	private SaltedSHA256PasswordEncoder passwordEncoder;
-
+	
+	private static final Logger logger = Logger.getLogger(LoginController.class);
+	
+	
 
 
 	/**
@@ -150,7 +152,7 @@ public class LoginController {
 			try {
 				emailService.sendMailOnRegistration(userVO, locale);
 			} catch (MessagingException e) {				
-				e.printStackTrace();
+				logger.error(e);
 			}
 		}
 
@@ -187,7 +189,7 @@ public class LoginController {
 				emailService.sendMailOnForgotPassword(updatedUserVO, password, locale);
 			} catch (MessagingException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error(e);
 			}
 			
 		}

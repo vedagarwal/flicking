@@ -30,8 +30,8 @@
     margin: 0;
     line-height: 18px;
 }
-.movie-details .half-line {
-    line-height: 5px;
+.half-line {
+    line-height: 5px !important;
 }
 .rating {
     height: 35px;
@@ -111,5 +111,20 @@ color: green;
 
 .red-color{
 color: red;
+}
+
+.movie-small-image {
+    padding: 2px;
+}
+.small-movie-detail h5{
+font-size: 16px;   
+}
+
+.thumbs-icon{
+margin-top: 10px;
+}
+
+.centre-align{
+text-align: center;
 }
 

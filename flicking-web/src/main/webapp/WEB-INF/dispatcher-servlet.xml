@@ -5,13 +5,15 @@
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jee="http://www.springframework.org/schema/jee"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		 http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd">
 
 
 	<mvc:annotation-driven />
@@ -39,13 +41,25 @@
 	
 	<util:properties id="messageProperties" location="classpath:message.properties"/>
 
-	<bean id="dataSource"
+	<!-- <bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-	</bean>
+	</bean> -->
+	
+	<jee:jndi-lookup id="dataSource"
+   jndi-name="jdbc/MySQLDS"
+   expected-type="javax.sql.DataSource" />
+	
+	<!-- <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="jdbc:mysql://#{systemProperties['OPENSHIFT_MYSQL_DB_HOST']}:#{systemProperties['OPENSHIFT_MYSQL_DB_PORT']}/flicking" />
+		<property name="username" value="adminlTINWug" />
+		<property name="password" value="r-Xw_1CNVk76" />
+	</bean> -->
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

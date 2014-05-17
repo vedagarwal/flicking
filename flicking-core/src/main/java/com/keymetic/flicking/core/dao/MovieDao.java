@@ -97,6 +97,7 @@ public class MovieDao {
 		criteria.setMaxResults(limit);
 		criteria.add(Restrictions.eq("published",true));
 		criteria.add(Restrictions.eq("released",true));
+		criteria.addOrder(Order.desc("releaseDate"));
 		criteria.addOrder(Order.desc("createdDate"));		
 		movies = criteria.list();
 		return movies;
@@ -110,6 +111,7 @@ public class MovieDao {
 		criteria.setMaxResults(limit);
 		criteria.add(Restrictions.eq("published",true));
 		criteria.add(Restrictions.eq("released",false));
+		criteria.addOrder(Order.asc("releaseDate"));
 		criteria.addOrder(Order.desc("createdDate"));		
 		movies = criteria.list();
 		return movies;

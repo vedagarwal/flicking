@@ -1,6 +1,6 @@
 var IndexController = function IndexController($rootScope, $scope, MovieService, ngProgress, $facebook) {
-    $rootScope.reviewers = ["Times of India", "India Today", "Rotten Tomatoes"];
-    $scope.itemsPerPage = 2;
+    $rootScope.reviewers = ["Times of India", "NDTV", "Rajeev Masand","Book My Show","Rediff","Rotten Tomatoes","IMDB","Hindustan Times"];
+    $scope.itemsPerPage = 5;
     $scope.currentPage = 0;
 
     $scope.fetchMovieList = function () {
@@ -34,15 +34,14 @@ var IndexController = function IndexController($rootScope, $scope, MovieService,
 
 
     //fb share
-    $scope.share = function (movie) {
-        console.log("Inside Share");
+    $scope.share = function (movie) {    
 
         $facebook.ui({
             method: 'feed',
             name: movie.movieName,
             caption: 'Overall Rating ' + movie.averageReviewerRating + ' out of 5',
             description: movie.description,
-            link: 'http://flicking-keymetic.rhcloud.com/#/movie/' + movie.id,
+            link: 'http://www.flickingtruth.com/#/movie/' + movie.id,
             picture: movie.imageURL
         });
 
@@ -50,6 +49,15 @@ var IndexController = function IndexController($rootScope, $scope, MovieService,
 
 
     $scope.fetchMovieList();
+    
+    $scope.fetchUpcomingMovieList = function () {
+        $scope.upcomingmovies = MovieService.getUpcoming({
+            limit: $scope.itemsPerPage,
+            offset: 0
+        });
+    };
+    
+    $scope.fetchUpcomingMovieList();
 
 
 };
@@ -76,6 +84,7 @@ var IndexMovieDetailController = function ($scope, $rootScope, $routeParams, $lo
                 newComment.$save({
                     movieId: id
                 }).then(function () {
+                     $scope.comments.push(newComment);
                     toastr.success("Comment posted successfully");
 
                 }, function (response) {
@@ -85,6 +94,21 @@ var IndexMovieDetailController = function ($scope, $rootScope, $routeParams, $lo
                 });
             }
         }
+
+    };
+    
+     //fb share
+    $scope.share = function (movie) {     
+
+        $facebook.ui({
+            method: 'feed',
+            name: movie.movieName,
+            caption: 'Overall Rating ' + movie.averageReviewerRating + ' out of 5',
+            description: movie.description,
+            link: 'http://www.flickingtruth.com/#/movie/' + movie.id,
+            picture: movie.imageURL
+           
+        });
 
     };
 
@@ -104,7 +128,7 @@ var LoginController = function LoginController($scope, $rootScope, $location, $c
             password: $scope.password
         }), function (authenticationResult) {
             var authToken = authenticationResult.token;
-            console.log("The auth token" + authToken);
+           // console.log("The auth token" + authToken);
             $rootScope.authToken = authToken;
             if ($scope.rememberMe) {
                 $cookieStore.put('authToken', authToken);
@@ -115,10 +139,26 @@ var LoginController = function LoginController($scope, $rootScope, $location, $c
             });
 
         }, function () {
-            $scope.alert.message = "Invalid Email/Password";
+            $scope.alert.message = "Oops!! Invalid Email or Password";
             $scope.alert.status = "danger";
 
         })
+    };
+    
+    
+    $scope.credentials  = new LoginService();
+    
+    $scope.forgotpassword = function (isValid) {
+        if (isValid) {
+            $scope.credentials.$forgotpassword().then(function () {
+                $scope.alert.message = "Password reset successful, a mail with new password has been sent to your id";
+                $scope.alert.status = "success";                
+            }, function (response) {
+                 $scope.alert.message = response.data.message;
+                $scope.alert.status = "danger";              
+            });
+
+        }
     };
 };
 
@@ -131,6 +171,8 @@ var RegisterController = function ($scope, $http, $location, LoginService) {
             $scope.user.$register().then(function () {
                 $scope.alert.message = "Congrats !! Your Account Has Been Created Successfully";
                 $scope.alert.status = "success";
+                $scope.user = {};
+                $scope.confirm_password = "";
             }, function (response) {
                 $scope.alert.message = response.data.message;
                 $scope.alert.status = "danger";
@@ -139,7 +181,7 @@ var RegisterController = function ($scope, $http, $location, LoginService) {
         }
     };
 
-}
+};
 
 var UserController = function ($scope, $http, $location, UserService) {
 
@@ -412,3 +454,40 @@ var UploadImageController = function ($scope, $http, $timeout, $upload, $routePa
         });
     };
 };
+
+var ContactController = function($scope,$location,LoginService){
+    
+    $scope.contact  = new LoginService();
+    
+    $scope.submitForm = function (isValid) {
+        if (isValid) {
+            $scope.contact.$contact().then(function () {
+                toastr.success("Message Sent Successfully");
+                $location.path("/");
+            }, function (response) {
+                toastr.error("Error Sending Message");
+            });
+
+        }
+    };
+};
+
+var UpcomingController = function($scope,$location,MovieService){    
+    $scope.itemsPerPage = 10;
+    $scope.currentPage = 0;
+
+    $scope.fetchMovieList = function () {
+        $scope.movies = MovieService.getUpcoming({
+            limit: $scope.itemsPerPage,
+            offset: $scope.currentPage * $scope.itemsPerPage
+        });
+    };
+    $scope.fetchMovieList();
+};
+
+function HeaderController($scope, $location) 
+{ 
+    $scope.isActive = function (viewLocation) { 
+        return viewLocation === $location.path();
+    };
+}

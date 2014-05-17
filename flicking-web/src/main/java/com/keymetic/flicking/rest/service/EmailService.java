@@ -1,6 +1,7 @@
 package com.keymetic.flicking.rest.service;
 
 
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
@@ -8,8 +9,10 @@ import java.util.Properties;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
@@ -32,12 +35,17 @@ public class EmailService {
 	@Autowired 
 	private TemplateEngine templateEngine;
 
-	@Value("${mail.contact}")
-	private String contactEmail;
+	@Value("${mail.from.email}")
+	private String fromEmail;
+	
+	@Value("${mail.from.name}")
+	private String fromName;
 
 
 	@Resource(name = "messageProperties")
 	private Properties messageProperties;
+	
+	private static final Logger logger = Logger.getLogger(EmailService.class);
 
 
 
@@ -164,8 +172,8 @@ public class EmailService {
 		final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
 		final MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
 		message.setSubject(messageProperties.getProperty("contact.mail.subject"));
-		message.setFrom(this.contactEmail);
-		message.setTo(this.contactEmail);
+		message.setFrom(this.fromEmail);
+		message.setTo(this.fromEmail);
 
 		// Create the HTML body using Thymeleaf
 		final String htmlContent = this.templateEngine.process("email-contact.html", ctx);
@@ -179,7 +187,14 @@ public class EmailService {
 		final MimeMessage mimeMessageTo = this.mailSender.createMimeMessage();
 		final MimeMessageHelper messageTo = new MimeMessageHelper(mimeMessageTo, "UTF-8");
 		messageTo.setSubject(messageProperties.getProperty("contact.auto.mail.subject"));
-		messageTo.setFrom(this.contactEmail);
+		
+		try {
+			messageTo.setFrom(new InternetAddress(this.fromEmail,this.fromName));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			logger.error(e);
+		}
+		
 		messageTo.setTo(contactVO.getEmail());
 
 		// Create the HTML body using Thymeleaf
@@ -204,7 +219,12 @@ public class EmailService {
 		final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
 		final MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
 		message.setSubject(messageProperties.getProperty("registration.mail.subject"));
-		message.setFrom(this.contactEmail);
+		try {
+			message.setFrom(new InternetAddress(this.fromEmail,this.fromName));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			logger.error(e);
+		}
 		message.setTo(userVO.getEmail());
 
 		// Create the HTML body using Thymeleaf
@@ -228,7 +248,12 @@ public class EmailService {
 		final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
 		final MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
 		message.setSubject(messageProperties.getProperty("forgotpassword.mail.subject"));
-		message.setFrom(this.contactEmail);
+		try {
+			message.setFrom(new InternetAddress(this.fromEmail,this.fromName));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			logger.error(e);
+		}
 		message.setTo(userVO.getEmail());
 
 		// Create the HTML body using Thymeleaf

@@ -7,7 +7,7 @@
                     <h3>Latest Movies</h3>
                     <ul class="list-listings">
                         <li ng-repeat="movie in movies">
-                    
+
                             <div class="row white-smoke-color">
                                 <div class="col-sm-3">
                                     <div>
@@ -33,19 +33,21 @@
                                         </p>
                                         <p class="half-line">&nbsp;</p>
                                         <p>
-                                            <i>"
-                                                {{movie.description}}"</i>
+                                            <i>" {{movie.description|limitTo:120}}.."
+                                            </i>
                                         </p>
-                                         <p class="half-line">&nbsp;</p>
-                                        <button type="button" class="btn btn-xs btn-primary facebook-color" ng-click="share(movie)"><span class="fa fa-facebook-square fa-lg"></span>&nbsp;Share on Facebook</button>
+                                        <p class="half-line">&nbsp;</p>
+                                        <button type="button" class="btn btn-xs btn-primary facebook-color" ng-click="share(movie)">
+                                            <span class="fa fa-facebook-square fa-lg"></span>&nbsp;Share on Facebook</button>
                                     </div>
-                                   
-                                                                        
+
+
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="movie-side">
-                                        <div class="rating">{{movie.averageReviewerRating}}<span class="rating-upon">/5</span></div>
-                                        <p>OVERALL RATING</p>                                       
+                                        <div class="rating">{{movie.averageReviewerRating|number:1}}<span class="rating-upon">/5</span>
+                                        </div>
+                                        <p>OVERALL RATING</p>
                                         <a href="#/movie/{{movie.id}}" class="btn btn-two">Read more</a>
                                     </div>
                                 </div>
@@ -62,31 +64,34 @@
                         </li>
                     </ul>
                 </div>
-<!--            Begin right content-->
+                <!--            Begin right content-->
                 <div class="col-sm-12 col-md-4">
                     <h3>Upcoming Movies</h3>
-                    <ul class="bullet">
-                                        <li>
-                                            <figure>1</figure>
-                                            <h4>Movie Name</h4>
-                                            <p>Release Date : 12/7/2014</p>
-                                            <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                        </li>
-                                        <li>
-                                            <figure>2</figure>
-                                            <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                        </li>
-                                        <li>
-                                            <figure>3</figure>
-                                            <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                        </li>
-                                    </ul>
+                    <ul class="list-listings">
+                        <li ng-repeat="movie in upcomingmovies">
+                            
+                            <div class="row">
+                            <div class="col-sm-4"><div class="movie-small-image">
+                                        <img ng-src="{{movie.imageURL}}" class="img-responsive img-center" alt="">
+                                    </div></div>
+                            <div class="col-sm-8">
+                                <div class="small-movie-detail">
+                                <h5>{{movie.movieName}}</h5>
+                                <i><b>Directed by</b>&nbsp;{{movie.director}}</i><br> 
+                                <i><b>Coming on </b>&nbsp;{{movie.releaseDate | date:'mediumDate'}}</i><br>
+                                <p>{{movie.description | limitTo:100}}.. <a href="#upcoming" class="">Read more</a></p>
+                                </div>
+                                </div>
+                            </div>              
+                            
+                        </li>    
+                    </ul>
                 </div>
-<!--                End right content-->
-                
-                
-                
-                
+                <!--                End right content-->
+
+
+
+
             </div>
         </div>
     </div>

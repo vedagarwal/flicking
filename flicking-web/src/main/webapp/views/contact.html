@@ -1,3 +1,20 @@
+ <div class="pg-opt pin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Contact</h2>
+                </div>
+                <div class="col-md-6">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                       <li class="active">Contact</li>
+                    </ol>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+   
 <section class="slice no-padding">
 <!--        <div id="mapCanvas" class="map-canvas no-margin"></div>-->
     </section>
@@ -9,35 +26,35 @@
                     <div class="col-md-6">
                         <h3 class="section-title">Contact us</h3>
                         <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        For any  queries and suggestions please submit the form given below, we would try to get back to you as soon as possible.
                         </p>
                         
-                        <form class="form-light mt-20" role="form">
+                        <form name="contactForm" class="form-light mt-20" role="form" ng-submit="submitForm(contactForm.$valid)">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control" placeholder="Your name">
+                                <input type="text" name="name" class="form-control" placeholder="Your name" ng-model="contact.name">
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" placeholder="Email address">
+                                        <input type="email" name="email" class="form-control" placeholder="Email address" ng-model="contact.email">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Phone</label>
-                                        <input type="text" class="form-control" placeholder="Phone number">
+                                        <input type="text" name="phone" class="form-control" placeholder="Phone number" ng-model="contact.phone">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Subject</label>
-                                <input type="text" class="form-control" placeholder="Subject">
+                                <input type="text" name="subject" class="form-control" placeholder="Subject" ng-model="contact.subject">
                             </div>
                             <div class="form-group">
                                 <label>Message</label>
-                                <textarea class="form-control" id="message" placeholder="Write you message here..." style="height:100px;"></textarea>
+                                <textarea class="form-control" name="message" id="message" placeholder="Write you message here..." style="height:100px;" ng-model="contact.message"></textarea>
                             </div>
                             <button type="submit" class="btn btn-two">Send message</button>
                         </form>
@@ -48,15 +65,18 @@
                                 <h3 class="section-title">Business info</h3>
                                 <div class="contact-info">
                                     <h5>Address</h5>
-                                    <p>5th Avenue, New York - United States</p>
+                                    <p>Bellandur, Bangalore - India</p>
                                     
                                     <h5>Email</h5>
-                                    <p>hello@webpixels.ro</p>
+                                    <p>support@flickingtruth.com</p>
                                     
+<!--
                                     <h5>Phone</h5>
                                     <p>+10 724 1234 567</p>
+-->
                                 </div>
                             </div>
+<!--
                             <div class="col-md-6">
                                 <h3 class="section-title">Program</h3>
                                 <div class="contact-info">
@@ -70,10 +90,11 @@
                                     <p>Closed</p>
                                 </div>
                             </div>
+-->
                         </div>
                         <h3 class="section-title">Stay connected</h3>
                         <p>
-                        Lorem ipsum dolor sit amet, consectetur acing elit. Aenean esrsel piesn qersl ioinm sersoe non urna dolor aecena.
+                        Keep in touch with us on the following social channels.
                         </p>
                         <div class="social-media">
                             <a href="contact.html#"><i class="fa fa-facebook facebook"></i></a>

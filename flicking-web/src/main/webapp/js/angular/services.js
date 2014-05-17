@@ -3,7 +3,7 @@
 /* Services */
 
 var AppServices = angular.module("flickingApp.services", ["ngResource"]);
-var baseURL = "http://flicking-keymetic.rhcloud.com/api/";
+var baseURL = "http://www.flickingtruth.com/api/";
 //var baseURL = "http://localhost:8080/flicking-web/api/";
 
 AppServices.factory('MovieService', function ($resource) {
@@ -41,6 +41,14 @@ AppServices.factory('LoginService', function($resource) {
                 register: {
 					method: 'POST',
                     params: {'action' : 'register'},
+				},
+                contact: {
+					method: 'POST',
+                    params: {'action' : 'contact'},
+				},
+                forgotpassword: {
+					method: 'POST',
+                    params: {'action' : 'forgotpassword'},
 				}
 			}
 		);

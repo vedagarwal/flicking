@@ -1,0 +1,60 @@
+ <div class="pg-opt pin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Upcoming Movies</h2>
+                </div>
+                <div class="col-md-6">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home</a></li>                        
+                        <li class="active">Upcoming Movies</li>
+                    </ol>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+<section class="slice bg-3 animate-hover-slide">
+    <div class="w-section inverse blog-grid">
+        <div class="container">
+            <div id="masonryWr" class="row">
+               
+                <div class="item col-md-3" ng-repeat="movie in movies">
+                    <div class="w-box">
+                        <div class="figure">
+                            <img ng-src="{{movie.imageURL}}" class="img-responsive img-center" alt="">                           
+<!--
+                            <span class="date-over">
+                                <strong>Web Design</strong>
+                            </span>
+-->
+                            <h2>{{movie.movieName}}</h2>
+                            
+                            <p>
+                            <strong>DIRECTOR :&nbsp;</strong>{{movie.director}}<br>
+                            <strong>WRITER :&nbsp;</strong>{{movie.writer}}</p>                                      
+                            
+                            <p>{{movie.description}}</p>
+                            <div class="w-footer">
+                                <span class="pull-left">
+                                    <small>Coming On {{movie.releaseDate | date:'mediumDate'}}</small>
+                                </span>
+                                <div class="like-button inline pull-right">
+                                    <span class="button">
+                                        <i class="fa fa-heart"></i>
+                                    </span>
+                                    <span class="count">
+                                        <small>33</small>
+                                    </span>
+                                </div>
+                                <span class="clearfix"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</section>
